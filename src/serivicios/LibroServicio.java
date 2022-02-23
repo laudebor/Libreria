@@ -1,7 +1,7 @@
 package serivicios;
 
 import entidades.Libro;
-import java.util.List;
+//import java.util.List;
 import java.util.Scanner;
 import persistencia.LibroDAO;
 
@@ -81,6 +81,8 @@ public class LibroServicio {
         System.out.print("ISBN: "); int isbn = scan.nextInt();
         try{
             Libro libroEliminar = dao.buscarLibroISBN(isbn);
+            System.out.println("Datos del libro a eliminar: ");
+            System.out.println(libroEliminar.toString());
             dao.eliminar(libroEliminar);
         }catch(Exception e){
             System.out.println(e.getMessage());
@@ -95,6 +97,19 @@ public class LibroServicio {
             libro.setAlta(Boolean.FALSE);
             dao.editar(libro);
             System.out.println("----EL LIBRO ISBN: " + isbn + " SE HA DADO DE BAJA CORRECTAMENTE----");
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }   
+    }
+    
+    public void darAltaLibro(){
+        System.out.println("----DAR DE BAJA LIBRO----");
+        System.out.print("ISBN: "); int isbn = scan.nextInt();
+        try{
+            Libro libro = dao.buscarLibroISBN(isbn);
+            libro.setAlta(Boolean.TRUE);
+            dao.editar(libro);
+            System.out.println("----EL LIBRO ISBN: " + isbn + " SE HA DADO DE ALTA CORRECTAMENTE----");
         }catch(Exception e){
             System.out.println(e.getMessage());
         }

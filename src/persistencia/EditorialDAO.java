@@ -28,6 +28,14 @@ public class EditorialDAO extends DAO<Editorial> {
         return editorial;
     }
     
+    public Editorial buscarEditorialID(int id){
+        conectar();
+        Editorial editorial = (Editorial) em.createQuery("SELECT e FROM Editorial e WHERE e.id LIKE :id")
+                .setParameter("id", id).getSingleResult();
+        desconectar();
+        return editorial;
+    }
+    
     public List<Editorial> listarEditoriales(){
         conectar();
         List<Editorial> editoriales = em.createQuery("SELECT e FROM Editorial e").getResultList();

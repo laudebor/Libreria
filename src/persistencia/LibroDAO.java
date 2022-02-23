@@ -22,7 +22,6 @@ public final class LibroDAO extends DAO<Libro>{
     }
     
    public List<Libro> buscarLibroNombre(String nombre){
-       
            conectar();
            List<Libro> libros = em.createQuery("SELECT l FROM Libro l WHERE l.titulo LIKE :nombre")
                    .setParameter("nombre", nombre).getResultList();
@@ -36,6 +35,7 @@ public final class LibroDAO extends DAO<Libro>{
        desconectar();
        return libro;
    }
+   
    public List<Libro> listarLibros(){
        conectar();
        List<Libro> libros = em.createQuery("SELECT l FROM Libro l").getResultList();
@@ -43,5 +43,9 @@ public final class LibroDAO extends DAO<Libro>{
        return libros;
    }
     
+//   public void eliminarPorISBN(int isbn){
+//       Libro libro = buscarLibroISBN(isbn);
+//       eliminar(libro);
+//   }
     
 }

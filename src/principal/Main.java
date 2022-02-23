@@ -1,5 +1,6 @@
 package principal;
 
+import persistencia.LibroDAO;
 import serivicios.AutorServicio;
 import serivicios.EditorialServicio;
 import serivicios.LibroServicio;
@@ -14,8 +15,10 @@ public class Main {
         //ls.crearLibro();
         //ls.mostrarLibros();
         //es.crearEditorial();
-        ls.darBajaLibro();
-        
+        //ls.eliminarLibro();
+        //ls.darBajaLibro();
+        //es.crearEditorial();
+        es.editarEditorial();
     }
     
 }
