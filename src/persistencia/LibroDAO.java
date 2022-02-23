@@ -22,15 +22,25 @@ public final class LibroDAO extends DAO<Libro>{
     }
     
    public List<Libro> buscarLibroNombre(String nombre){
-       try{
+       
            conectar();
-           List<Libro> libros = (List<Libro>) em.createQuery("SELECT l FROM Libro l WHERE l.nombre LIKE :nombre")
+           List<Libro> libros = em.createQuery("SELECT l FROM Libro l WHERE l.titulo LIKE :nombre")
                    .setParameter("nombre", nombre).getResultList();
+           desconectar();
            return libros;
-       }catch(Exception e){
-           System.out.println("Error en buscarlibroNombre");
-           throw e;
-       }
+   }
+   
+   public Libro buscarLibroISBN(int isbn){
+       conectar();
+       Libro libro = (Libro) em.createQuery("SELECT l FROM Libro l WHERE l.isbn LIKE :isbn").setParameter("isbn", isbn).getSingleResult();
+       desconectar();
+       return libro;
+   }
+   public List<Libro> listarLibros(){
+       conectar();
+       List<Libro> libros = em.createQuery("SELECT l FROM Libro l").getResultList();
+       desconectar();
+       return libros;
    }
     
     
