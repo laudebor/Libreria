@@ -1,25 +1,27 @@
-package serivicios;
+package persistencia;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-public abstract class CRUD {
+public class DAO<T> {
     
-    EntityManager em = Persistence.createEntityManagerFactory("LibreriaPU").createEntityManager();
+    protected final EntityManagerFactory emf = Persistence.createEntityManagerFactory("LibreriaPU");
+    protected EntityManager em = emf.createEntityManager();
     
-    public void conectar(){
+    protected void conectar(){
         if(!em.isOpen()){
-            em = Persistence.createEntityManagerFactory("LibreriaPU").createEntityManager();
+            em = emf.createEntityManager();
         }
     }
     
-    public void desconectar(){
+    protected void desconectar(){
         if(em.isOpen()){
             em.close();
         }
     }
     
-    public void guardar(Object objeto){
+    protected void guardar(T objeto){
         conectar();
         em.getTransaction().begin();
         em.persist(objeto);
@@ -27,7 +29,7 @@ public abstract class CRUD {
         desconectar();
     }
     
-    public void eliminar(Object objeto){
+    protected void eliminar(T objeto){
         conectar();
         em.getTransaction().begin();
         em.remove(objeto);
@@ -35,7 +37,7 @@ public abstract class CRUD {
         desconectar();
     }
     
-    public void editar(Object objeto){
+    protected void editar(T objeto){
         conectar();
         em.getTransaction().begin();
         em.merge(objeto);
@@ -45,3 +47,5 @@ public abstract class CRUD {
     
     
 }
+
+    

@@ -3,14 +3,14 @@ package entidades;
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Libro implements Serializable {
-    private static final long serialVersionUID = 1L;
+    
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(generator = "uuid")
     private Long isbn;
     private String titulo;
     private Integer anio;
@@ -18,7 +18,11 @@ public class Libro implements Serializable {
     private Integer ejemplaresPrestados;
     private Integer ejemplaresRestantes;
     private Boolean alta;
+    
+    @ManyToOne
     private Autor autor;
+    
+    @ManyToOne
     private Editorial editorial;
 
     public Libro() {
