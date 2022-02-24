@@ -7,21 +7,25 @@ import persistencia.AutorDAO;
 public class AutorServicio {
 
     Scanner scan = new Scanner(System.in);
-    private AutorDAO dao;
+    private final AutorDAO dao;
 
     public AutorServicio() {
         this.dao = new AutorDAO();
     }
 
     public Autor crearAutor() {
+        System.out.println("");
         System.out.println("----CARGAR NUEVO AUTOR----");
+        System.out.println("");
         Autor autor = new Autor();
         try {
             System.out.print("Nombre: ");
             autor.setNombre(scan.next());
             autor.setAlta(true);
             dao.guardar(autor);
+            System.out.println("");
             System.out.println("----AUTOR CARGADO CON ÉXITO----");
+            System.out.println("");
             return autor;
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -30,24 +34,32 @@ public class AutorServicio {
     }
 
     public void editarAutor() {
+        System.out.println("");
         System.out.println("----EDITAR AUTOR----");
+        System.out.println("");
         System.out.print("Ingrese el id del autor que desea editar: ");
         try {
             Autor autor = dao.buscarAutorId(scan.nextInt());
+            System.out.println("");
             System.out.print("Ingrese el nuevo nombre del autor: ");
             autor.setNombre(scan.next());
             dao.editar(autor);
+            System.out.println("");
+            System.out.println("----AUTOR EDITADO CON ÉXITO----");
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
 
-    public void eliminarAutorNombre() {
+    public void eliminarAutorId() {
         try {
+            System.out.println("");
             System.out.println("----ELIMINAR AUTOR----");
-            System.out.print("Ingrese el nombre del autor que desea eliminar: ");
-            String nombre = scan.next();
-            Autor autor = dao.buscarAutorNombre(nombre);
+            System.out.println("");
+            System.out.print("Ingrese el id del autor que desea eliminar: ");
+            int id = scan.nextInt();
+            System.out.println("");
+            Autor autor = dao.buscarAutorId(id);
             dao.eliminar(autor);
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -55,22 +67,45 @@ public class AutorServicio {
     }
 
     public void mostrarAutores() {
+        System.out.println("");
         System.out.println("----AUTORES----");
+        System.out.println("");
         for (Autor aux : dao.listarAutores()) {
             System.out.println(aux.toString());
         }
     }
 
-    public Autor BuscarAutor(String nombre) {
+    public void BuscarAutoresNombre() {
+        System.out.println("");
+        System.out.println("----BUSCAR AUTOR POR NOMBRE----");
+        System.out.println("");
+        System.out.print("Nombre: "); String nombre = scan.next();
+        System.out.println("");
         try {
-            return dao.buscarAutorNombre(nombre);
+            for(Autor aux : dao.buscarAutorNombre(nombre)){
+                System.out.println(aux.toString());
+            }
+            
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            return null;
+            
         }
     }
 
-    public Autor BuscarAutorID(Integer id) {
+    public void BuscarAutorID() {
+        System.out.println("");
+        System.out.println("----BUSCAR AUTOR POR ID----");
+        System.out.println("");
+        System.out.print("ID autor: "); int id = scan.nextInt();
+        System.out.println("");
+        try {
+            System.out.println(dao.buscarAutorId(id).toString());
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    public Autor BuscarAutorID(int id){
         try {
             return dao.buscarAutorId(id);
         } catch (Exception e) {

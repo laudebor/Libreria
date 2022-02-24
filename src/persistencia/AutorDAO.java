@@ -29,13 +29,13 @@ public class AutorDAO extends DAO<Autor> {
         return autor;
     }
 
-    public Autor buscarAutorNombre(String nombre) {
+    public List<Autor> buscarAutorNombre(String nombre) {
 
         conectar();
-        Autor autor = (Autor) em.createQuery("SELECT a FROM Autor a WHERE a.nombre LIKE :nombre")
-                .setParameter("nombre", nombre).getSingleResult();
+        List<Autor> autores = em.createQuery("SELECT a FROM Autor a WHERE a.nombre LIKE :nombre")
+                .setParameter("nombre", nombre).getResultList();
         desconectar();
-        return autor;
+        return autores;
 
     }
 

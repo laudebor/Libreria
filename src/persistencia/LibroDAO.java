@@ -43,9 +43,5 @@ public final class LibroDAO extends DAO<Libro>{
        return libros;
    }
     
-//   public void eliminarPorISBN(int isbn){
-//       Libro libro = buscarLibroISBN(isbn);
-//       eliminar(libro);
-//   }
-    
+
 }
