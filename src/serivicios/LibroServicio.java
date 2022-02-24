@@ -58,6 +58,25 @@ public class LibroServicio {
             System.out.println(e.getMessage());
         }
     }
+    
+    // 9) Búsqueda de un libro por ISBN.
+    
+    public void buscarLibroISBN(){
+        System.out.println("");
+        System.out.println("----BUSCAR LIBRO POR ISBN----");
+        System.out.println("");
+        System.out.print("ISBN: "); int isbn = scan.nextInt();
+        try{
+            Libro libro = dao.buscarLibroISBN(isbn);
+            System.out.println("");
+            System.out.print("----LIBRO ENCONTRADO: ");
+            System.out.println(libro.toString());
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    // 10) Búsqueda de un libro por Título.
 
     public void buscarLibrosNombre() {
         System.out.println("");
@@ -72,6 +91,42 @@ public class LibroServicio {
             }
         }catch(Exception e){
              System.out.println(e.getMessage());
+        }
+        
+    }
+    
+    
+    // 11) Búsqueda de un libro/s por nombre de Autor.
+    
+    public void buscarLibrosNombreAutor(){
+        System.out.println("");
+        System.out.println("----BUSCAR LIBRO/S POR NOMBRE DE AUTOR----");
+        System.out.println("");
+        System.out.print("Nombre autor: "); String nombreAutor = scan.next();
+        System.out.println("");
+        try{
+            for(Libro aux : dao.buscarLibroAutor(nombreAutor)){
+                System.out.println(aux.toString());
+            }
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    // 12) Búsqueda de un libro/s por nombre de Editorial.
+    
+    public void buscarLibrosNombreEditorial(){
+        System.out.println("");
+        System.out.println("----BUSCAR LIBRO/S POR NOMBRE DE EDITORIAL----");
+        System.out.println("");
+        System.out.print("Nombre editorial: "); String nombreEditorial = scan.next();
+        System.out.println("");
+        try{
+            for(Libro aux : dao.buscarLibroEditorial(nombreEditorial)){
+                System.out.println(aux.toString());
+            }
+        }catch(Exception e){
+            System.out.println(e.getMessage());
         }
         
     }

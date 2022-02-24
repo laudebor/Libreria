@@ -75,6 +75,8 @@ public class AutorServicio {
         }
     }
 
+    // 8) Búsqueda de un Autor por nombre.
+    
     public void BuscarAutoresNombre() {
         System.out.println("");
         System.out.println("----BUSCAR AUTOR POR NOMBRE----");
@@ -111,6 +113,40 @@ public class AutorServicio {
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return null;
+        }
+    }
+    
+    public void darBajaAutor(){
+        System.out.println("");
+        System.out.println("----DAR DE BAJA UN AUTOR-----");
+        System.out.println("");
+        try{
+            System.out.print("ID autor: "); int id = scan.nextInt();
+            System.out.println("");
+            Autor autor = dao.buscarAutorId(id);
+            autor.setAlta(Boolean.FALSE);
+            dao.editar(autor);
+            System.out.println("");
+            System.out.println("----EL AUTOR ID: " + id + " SE HA DADO DE BAJA CORRECTAMENTE----");
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    public void darAltaAutor(){
+        System.out.println("");
+        System.out.println("----DAR DE ALTA UN AUTOR-----");
+        System.out.println("");
+        try{
+            System.out.print("ID autor: "); int id = scan.nextInt();
+            System.out.println("");
+            Autor autor = dao.buscarAutorId(id);
+            autor.setAlta(Boolean.TRUE);
+            dao.editar(autor);
+            System.out.println("");
+            System.out.println("----EL AUTOR ID: " + id + " SE HA DADO DE ALTA CORRECTAMENTE----");
+        }catch(Exception e){
+            System.out.println(e.getMessage());
         }
     }
 

@@ -8,15 +8,21 @@ public class Main {
 
     public static void main(String[] args) {
         
-        AutorServicio as = new AutorServicio();
-        LibroServicio ls = new LibroServicio();
-        EditorialServicio es = new EditorialServicio();
+        Menu menu = new Menu();
+        menu.Ejecucion();
+        
+//        AutorServicio as = new AutorServicio();
+//        LibroServicio ls = new LibroServicio();
+//        EditorialServicio es = new EditorialServicio();
         
         //ls.crearLibro();
         //ls.mostrarLibros();
         //ls.darBajaLibro();
         //ls.darAltaLibro();
         //ls.buscarLibrosNombre();
+        //ls.buscarLibroISBN();
+        //ls.buscarLibrosNombreAutor();
+        //ls.buscarLibrosNombreEditorial();
         //ls.eliminarLibro(); NO FUNCIONA
         
         //as.BuscarAutorID();
@@ -24,6 +30,8 @@ public class Main {
         //as.crearAutor();
         //as.editarAutor();
         //as.mostrarAutores();
+        //as.darBajaAutor();
+        //as.darAltaAutor();
         //as.eliminarAutorId(); NO FUNCIONA
         
         //es.crearEditorial();

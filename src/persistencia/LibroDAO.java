@@ -1,4 +1,3 @@
-
 package persistencia;
 
 import entidades.Libro;
@@ -39,6 +38,22 @@ public final class LibroDAO extends DAO<Libro>{
    public List<Libro> listarLibros(){
        conectar();
        List<Libro> libros = em.createQuery("SELECT l FROM Libro l").getResultList();
+       desconectar();
+       return libros;
+   }
+   
+   public List<Libro> buscarLibroAutor(String nombreAutor){
+       conectar();
+       List<Libro> libros = em.createQuery("SELECT l FROM Libro l JOIN l.autor a WHERE a.nombre LIKE :nombreAutor")
+               .setParameter("nombreAutor", nombreAutor).getResultList();
+       desconectar();
+       return libros;
+   }
+   
+   public List<Libro> buscarLibroEditorial(String nombreEditorial){
+       conectar();
+       List<Libro> libros = em.createQuery("SELECT l FROM Libro l JOIN l.editorial e WHERE e.nombre LIKE :nombreEditorial")
+               .setParameter("nombreEditorial", nombreEditorial).getResultList();
        desconectar();
        return libros;
    }
