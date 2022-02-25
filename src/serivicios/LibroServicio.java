@@ -9,7 +9,7 @@ public class LibroServicio {
     private final LibroDAO dao;
     private final AutorServicio as;
     private final EditorialServicio es;
-    Scanner scan = new Scanner(System.in);
+    static Scanner scan = new Scanner(System.in).useDelimiter("\n");
 
     public LibroServicio() {
         this.dao = new LibroDAO();
@@ -18,35 +18,35 @@ public class LibroServicio {
     }
 
     public void crearLibro() {
-
+        Scanner scan2 = new Scanner(System.in).useDelimiter("\n");
         Libro libro = new Libro();
         try {
             System.out.println("");
             System.out.println("----CARGAR NUEVO LIBRO----");
             System.out.println("");
             System.out.print("Título: ");
-            libro.setTitulo(scan.next());
+            libro.setTitulo(scan2.next());
             System.out.print("Año: ");
-            libro.setAnio(scan.nextInt());
+            libro.setAnio(scan2.nextInt());
             System.out.print("Cantidad de ejemplares: ");
-            libro.setEjemplares(scan.nextInt());
+            libro.setEjemplares(scan2.nextInt());
             System.out.print("Ejemplares prestados: ");
-            libro.setEjemplaresPrestados(scan.nextInt());
+            libro.setEjemplaresPrestados(scan2.nextInt());
             System.out.print("Ejemplares restantes: ");
-            libro.setEjemplaresRestantes(scan.nextInt());
+            libro.setEjemplaresRestantes(scan2.nextInt());
             System.out.print("ID del autor: ");
-            int idAutor = scan.nextInt();
+            int idAutor = scan2.nextInt();
             while (as.BuscarAutorID(idAutor)== null) {
                 System.out.println("El autor ingresado no se encuentra en la base de datos. Ingréselo nuevamente");
-                idAutor = scan.nextInt();
+                idAutor = scan2.nextInt();
             }
 
             libro.setAutor(as.BuscarAutorID(idAutor));
             libro.setAlta(true);
-            System.out.print("Nombre editorial: "); String nombreEditorial = scan.next();
+            System.out.print("Nombre editorial: "); String nombreEditorial = scan2.next();
             while (es.buscarEditorialNombre(nombreEditorial)==null) {
                 System.out.print("La editorial ingresada no se encuentra en la base de datos. Ingrésela nuevamente");
-                nombreEditorial = scan.next();
+                nombreEditorial = scan2.next();
             }
             libro.setEditorial(es.buscarEditorialNombre(nombreEditorial));
                     
@@ -55,7 +55,10 @@ public class LibroServicio {
             System.out.println("----LIBRO CARGADO CON ÉXITO----");
             System.out.println("");
         } catch (Exception e) {
+            System.out.print("Ocurrió un error en crearLibro: ");
             System.out.println(e.getMessage());
+            System.out.println("Intentalo nuevamente");
+            crearLibro();            
         }
     }
     
@@ -65,14 +68,17 @@ public class LibroServicio {
         System.out.println("");
         System.out.println("----BUSCAR LIBRO POR ISBN----");
         System.out.println("");
-        System.out.print("ISBN: "); int isbn = scan.nextInt();
+        
         try{
+            System.out.print("ISBN: "); int isbn = scan.nextInt();
             Libro libro = dao.buscarLibroISBN(isbn);
             System.out.println("");
             System.out.print("----LIBRO ENCONTRADO: ");
             System.out.println(libro.toString());
         }catch(Exception e){
+            System.out.print("Ocurrió un error en buscarLibroISBN");
             System.out.println(e.getMessage());
+            //buscarLibroISBN();
         }
     }
     

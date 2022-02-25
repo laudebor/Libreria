@@ -6,7 +6,7 @@ import persistencia.AutorDAO;
 
 public class AutorServicio {
 
-    Scanner scan = new Scanner(System.in);
+    Scanner scan = new Scanner(System.in).useDelimiter("\n");
     private final AutorDAO dao;
 
     public AutorServicio() {

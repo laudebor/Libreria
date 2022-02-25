@@ -7,7 +7,7 @@ import persistencia.EditorialDAO;
 public class EditorialServicio {
     
     private final EditorialDAO dao;
-    Scanner scan = new Scanner(System.in);
+    Scanner scan = new Scanner(System.in).useDelimiter("\n");
 
     public EditorialServicio() {
         this.dao = new EditorialDAO();
